@@ -1,0 +1,33 @@
+.flash__wrapper {
+  margin: 1rem 0;
+  .flash__message.error {
+    background: rgba(231, 12, 12, 0.568);
+  }
+  .flash__message.success {
+    background: rgba(12, 231, 49, 0.568);
+  }
+  .flash__message {
+    position: relative;
+    padding: 1rem;
+    border-radius: 5px;
+    color: white;
+    .flash__message-content {
+    }
+    .flash__close-button {
+      position: absolute;
+      top: 0;
+      right: 5px;
+      border: none;
+      background: transparent;
+      font-size: 2rem;
+      color: inherit;
+      cursor: pointer;
+      padding: 0;
+      line-height: 1;
+      &:focus,
+      &:active {
+        outline: none;
+      }
+    }
+  }
+}

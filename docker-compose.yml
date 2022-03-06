@@ -1,0 +1,32 @@
+version: "3.9"
+
+services:
+  frontend:
+    build:
+      context: ./vue-store-client
+      dockerfile: ./Dockerfile
+    depends_on:
+      - backend
+    volumes:
+      - ./vue-store-client:/app
+      - /app/node_modules
+    ports:
+      - "8080:8080"
+
+  backend:
+    build:
+      context: ./vue-store-server
+      dockerfile: ./Dockerfile
+    ports:
+      - "3000:3000"
+    depends_on:
+      - db
+    volumes:
+      - ./vue-store-server:/app
+      - /app/node_modules
+    command: npm run dev
+
+  db:
+    image: mongo:4.2.7
+    ports:
+      - "27017:27017"

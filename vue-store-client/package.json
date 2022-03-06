@@ -1,0 +1,48 @@
+{
+  "name": "state-management",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "serve": "vue-cli-service serve",
+    "build": "vue-cli-service build",
+    "lint": "vue-cli-service lint"
+  },
+  "dependencies": {
+    "axios": "^0.18.0",
+    "cloudinary-core": "^2.5.0",
+    "firebase": "^5.8.2",
+    "image-compressor.js": "^1.1.4",
+    "jquery": "^3.3.1",
+    "socket.io-client": "^2.2.0",
+    "vee-validate": "^2.1.5",
+    "velocity-animate": "^1.5.2",
+    "vue": "^2.5.21",
+    "vue-chat-scroll": "^1.3.5",
+    "vue-flash-message": "^0.7.2",
+    "vue-img-loader": "^1.0.0",
+    "vue-js-modal": "^1.3.28",
+    "vue-lazyload": "^1.2.6",
+    "vue-loading-overlay": "^3.1.1",
+    "vue-marquee-text-component": "^1.2.0",
+    "vue-moment": "^4.0.0",
+    "vue-notification": "^1.3.14",
+    "vue-resource": "^1.5.1",
+    "vue-router": "^3.0.1",
+    "vue-slick": "^1.1.15",
+    "vue-upload-multiple-image": "^1.1.1",
+    "vuex": "^3.0.1"
+  },
+  "devDependencies": {
+    "@vue/cli-plugin-babel": "^3.3.0",
+    "@vue/cli-plugin-eslint": "^3.3.0",
+    "@vue/cli-service": "^3.3.0",
+    "@vue/eslint-config-airbnb": "^4.0.0",
+    "babel-eslint": "^10.0.1",
+    "eslint": "^5.8.0",
+    "eslint-plugin-vue": "^5.0.0",
+    "firebase-tools": "^7.11.0",
+    "node-sass": "^4.9.0",
+    "sass-loader": "^7.0.1",
+    "vue-template-compiler": "^2.5.21"
+  }
+}

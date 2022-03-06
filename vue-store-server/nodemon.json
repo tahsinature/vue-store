@@ -1,0 +1,7 @@
+{
+  "watch": [
+    "."
+  ],
+  "exec": "npm start",
+  "ext": "*"
+}
