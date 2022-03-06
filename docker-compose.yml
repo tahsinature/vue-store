@@ -3,26 +3,26 @@ version: "3.9"
 services:
   frontend:
     build:
-      context: ./vue-store-client
+      context: ./client
       dockerfile: ./Dockerfile
     depends_on:
       - backend
     volumes:
-      - ./vue-store-client:/app
+      - ./client:/app
       - /app/node_modules
     ports:
       - "8080:8080"
 
   backend:
     build:
-      context: ./vue-store-server
+      context: ./server
       dockerfile: ./Dockerfile
     ports:
       - "3000:3000"
     depends_on:
       - db
     volumes:
-      - ./vue-store-server:/app
+      - ./server:/app
       - /app/node_modules
     command: npm run dev
 

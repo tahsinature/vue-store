@@ -1,0 +1,31 @@
+@mixin respond($appr, $point) {
+  //Approach Set
+  @if ($appr == mf) {
+    $appr: min-width;
+  } @else if ($appr == df) {
+    $appr: max-width;
+  }
+
+  //Breakpoint Set
+  @if ($point == mbl) {
+    $point: 576px;
+  } @else if ($point == tab-p) {
+    $point: 768px;
+  } @else if ($point == tab-l) {
+    $point: 992px;
+  } @else if ($point == desk-l) {
+    $point: 1900px;
+  }
+  //Media Query Set
+  @media ($appr: $point) {
+    @content;
+  }
+}
+
+// .content {
+//   height: 500px;
+//   background: red;
+//   @include respond(mf, mbl) {
+//     background: black;
+//   }
+// }

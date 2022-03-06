@@ -1,0 +1,20 @@
+.v--modal-background-click {
+  background: rgba(0, 0, 0, 0.795);
+  .v--modal-box {
+    top: 50% !important;
+    left: 50% !important;
+    transform: translate(-50%, -50%) !important;
+    max-width: 600px !important;
+    width: 80% !important;
+    height: auto !important;
+    // min-height: 300px !important;
+  }
+}
+
+//Overlay Load
+.vld-overlay {
+  z-index: 80;
+  .vld-background {
+    position: fixed !important;
+  }
+}
