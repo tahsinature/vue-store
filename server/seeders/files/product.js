@@ -1,8 +1,9 @@
+const faker = require("faker")
 const config = require("../../config")
 const BaseSeeder = require("../baseSeeder")
 
 class ProductSeeder extends BaseSeeder {
-  async createOne(user) {
+  async createOne(user, likers = []) {
     await this.models.Product.create({
       title: this.faker.commerce.productName().substring(0, 20),
       price: this.faker.commerce.price(),
@@ -14,13 +15,14 @@ class ProductSeeder extends BaseSeeder {
         },
       ],
 
-      likes: 0,
-      // likers: ['someone'],
-      location: this.config.locations.asia,
+      likes: likers.length,
+      likers,
+      location: faker.random.arrayElement(Object.values(config.locations)),
       author: user,
-      category: this.config.categories[0],
+      category: faker.random.arrayElement(Object.values(config.categories)),
       condition: "Used",
       isSold: false,
+      createdAt: faker.date.recent(1),
     })
   }
 
@@ -28,7 +30,7 @@ class ProductSeeder extends BaseSeeder {
     const result = []
 
     for (const _i of Array(num)) {
-      const product = await this.createOne(user)
+      const product = await this.createOne(user, [])
       result.push(product)
     }
 

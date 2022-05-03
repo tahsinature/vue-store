@@ -19,7 +19,21 @@ const config = {
     "south-america": "south-america",
     "north-america": "north-america",
   },
-  categories: ["mobile", "electronic", "vehicle", "property", "job", "service", "home-living", "fashion-health-beauty", "hobby-sport-kid", "business", "education", "pets", "food"],
+  categories: {
+    mobile: "mobile",
+    electronic: "electronic",
+    vehicle: "vehicle",
+    property: "property",
+    job: "job",
+    service: "service",
+    "home-living": "home-living",
+    "fashion-health-beauty": "fashion-health-beauty",
+    "hobby-sport-kid": "hobby-sport-kid",
+    business: "business",
+    education: "education",
+    pets: "pets",
+    food: "food",
+  },
   genders: {
     Male: "Male",
     Female: "Female",
@@ -28,6 +42,7 @@ const config = {
   random: {
     imageURL: "https://picsum.photos/200/300",
   },
+  defaultProductsPerPage: 15,
 }
 
 module.exports = config

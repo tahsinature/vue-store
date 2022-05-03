@@ -4,9 +4,7 @@ const Fuse = require("fuse.js")
 const db = require("../models")
 const config = require("../config")
 
-const ITEMS_PER_PAGE = 5
-
-const categoryDictionary = config.categories
+const categoryDictionary = Object.values(config.categories)
 const locationDictionary = Object.values(config.locations)
 
 const options = {
@@ -51,15 +49,15 @@ exports.getProducts = (req, res, next) => {
     .countDocuments()
     .then(totalProducts => {
       paginationInfo.totalProducts = totalProducts
-      paginationInfo.hasNextPage = page * ITEMS_PER_PAGE < totalProducts
+      paginationInfo.hasNextPage = page * config.defaultProductsPerPage < totalProducts
       return db.Product.find({
         category: categoryResult || { $exists: true },
         location: locationResult || { $exists: true },
         isSold: false,
       })
-        .skip((page - 1) * ITEMS_PER_PAGE)
+        .skip((page - 1) * config.defaultProductsPerPage)
         .sort({ createdAt: -1 })
-        .limit(ITEMS_PER_PAGE)
+        .limit(config.defaultProductsPerPage)
         .then(result => {
           if (result.length > 0) {
             const response = {}
