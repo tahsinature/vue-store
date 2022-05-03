@@ -9,7 +9,7 @@
   "scripts": {
     "start": "node app.js",
     "dev": "nodemon",
-    "seed": "node seeders"
+    "seed": "node --eval \"require('./seeders').seed()\""
   },
   "author": "Mohammad Tahsin",
   "license": "ISC",

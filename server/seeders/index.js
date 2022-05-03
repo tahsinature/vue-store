@@ -26,4 +26,5 @@ class Seeder {
 }
 
 const seeder = new Seeder();
-seeder.seed();
+module.exports = seeder;
+module.exports.seed = seeder.seed;

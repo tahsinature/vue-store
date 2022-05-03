@@ -11,7 +11,7 @@ class DB {
       })
       .then(() => console.log(`Connected to DB: ${config.dbURI}`))
       .catch(() => {
-        console.log(`DB Connection Failed: ${config.dbURI}`);
+        throw new Error(`DB Connection Failed: ${config.dbURI}`);
       });
   }
 
