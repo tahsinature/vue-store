@@ -1,7 +1,6 @@
-/* eslint-disable func-names */
-const mongoose = require('mongoose');
-const jwt = require('jsonwebtoken');
-const _ = require('lodash');
+const mongoose = require("mongoose")
+const jwt = require("jsonwebtoken")
+const _ = require("lodash")
 
 const userSchema = new mongoose.Schema(
   {
@@ -60,38 +59,40 @@ const userSchema = new mongoose.Schema(
     products: [
       {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'Product',
-      }
+        ref: "Product",
+      },
     ],
     cart: [
       {
         product: {
           type: mongoose.Schema.Types.ObjectId,
-          ref: 'Product',
+          ref: "Product",
         },
         quantity: {
           type: Number,
           required: true,
         },
-      }
+      },
     ],
-    contacts: [{
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'User',
-    }],
+    contacts: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User",
+      },
+    ],
     chats: [
       {
         partner: {
           type: mongoose.Schema.Types.ObjectId,
-          ref: 'User',
+          ref: "User",
         },
         messages: [
           {
             type: mongoose.Schema.Types.ObjectId,
-            ref: 'Message',
-          }
+            ref: "Message",
+          },
         ],
-      }
+      },
     ],
     isOnline: {
       type: Boolean,
@@ -101,11 +102,11 @@ const userSchema = new mongoose.Schema(
       {
         product: {
           type: mongoose.Schema.Types.ObjectId,
-          ref: 'Product',
+          ref: "Product",
         },
         user: {
           type: mongoose.Schema.Types.ObjectId,
-          ref: 'User',
+          ref: "User",
         },
         notificationType: {
           type: String,
@@ -119,27 +120,39 @@ const userSchema = new mongoose.Schema(
           type: Boolean,
           default: false,
         },
-      }
+      },
     ],
   },
-  { timestamps: true, }
-);
-userSchema.method('generateToken', function () {
-  const token = jwt.sign(_.pick(this, ['_id', 'fullName']), 'Secret');
-  return token;
-});
-userSchema.method('toAdminJSON', function () {
-  const cloned = this.toObject();
-  delete cloned.password;
-  return cloned;
-});
-userSchema.method('toUserJSON', function () {
-  const cloned = this.toObject();
-  delete cloned.userName;
-  delete cloned.email;
-  delete cloned.password;
-  delete cloned.contacts;
-  return cloned;
-});
+  { timestamps: true }
+)
 
-module.exports = mongoose.model('User', userSchema);
+userSchema.method("generateToken", function () {
+  const token = jwt.sign(_.pick(this, ["_id", "fullName"]), "Secret")
+  return token
+})
+
+userSchema.method("toAdminJSON", function () {
+  const cloned = this.toObject()
+  delete cloned.password
+  return cloned
+})
+
+userSchema.method("toUserJSON", function () {
+  const cloned = this.toObject()
+  delete cloned.userName
+  delete cloned.email
+  delete cloned.password
+  delete cloned.contacts
+  return cloned
+})
+
+userSchema.method("addContact", async function (user) {
+  const contact = this.contacts.find(contact => contact.userName === user.userName)
+  if (!contact) {
+    this.contacts.push(user)
+  }
+
+  await this.save()
+})
+
+module.exports = mongoose.model("User", userSchema)

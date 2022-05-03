@@ -27,17 +27,14 @@
 <script>
 // import { mapActions } from "vuex";
 export default {
-  props: ['item'],
+  props: ["item"],
   methods: {
     removeFromCart() {
-      // eslint-disable-next-line no-underscore-dangle
-      this.$store.dispatch('removeFromCart', this.item._id);
+      this.$store.dispatch("removeFromCart", this.item._id)
     },
   },
-  created() {
-    // console.log(this.item);
-  },
-};
+  created() {},
+}
 </script>
 
 <style lang="scss" scoped>
@@ -47,12 +44,7 @@ export default {
   &:not(:last-of-type) {
     border-bottom-width: 1px;
     border-bottom-style: solid;
-    border-image: linear-gradient(
-      to right,
-      #cccccc1f 0%,
-      #bdbdbd93 50%,
-      #cccccc1f 100%
-    );
+    border-image: linear-gradient(to right, #cccccc1f 0%, #bdbdbd93 50%, #cccccc1f 100%);
     border-image-slice: 1;
   }
   display: grid;

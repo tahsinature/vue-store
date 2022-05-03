@@ -1,9 +1,14 @@
 <template>
   <div class="nav">
     <div class="container">
-      <div class="left" @click="toggleNav()">
+      <div class="left">
         <img class="logo" src="../assets/images/logo.png" alt>
-        <h5>Vue Store</h5>
+          <h5 @click="toggleNav()">Vue Store</h5>
+      </div>
+      <div class="api-docs">
+        <a href="http://localhost:8080/docs.html" target="_blank">
+          API Docs
+        </a>
       </div>
       <div class="right" @click="showCart()">
         <p class="my-cart">
@@ -21,30 +26,30 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
-import eventBus from '../main';
+import { mapGetters } from "vuex"
+import eventBus from "../main"
 
 export default {
   methods: {
     toggleNav() {
-      eventBus.$emit('onToggleNav');
+      eventBus.$emit("onToggleNav")
     },
     showCart() {
       if (this.$store.getters.isLoggedIn) {
-        eventBus.$emit('onShowCart');
+        eventBus.$emit("onShowCart")
       } else {
-        eventBus.$emit('onNotify', {
-          title: 'Authentication Needed',
+        eventBus.$emit("onNotify", {
+          title: "Authentication Needed",
           text: "You 've to be logged in to use cart.",
-          type: 'error',
-        });
+          type: "error",
+        })
       }
     },
   },
   computed: {
-    ...mapGetters(['totalCartPrice', 'numOfItemInCart']),
+    ...mapGetters(["totalCartPrice", "numOfItemInCart"]),
   },
-};
+}
 </script>
 
 
@@ -76,6 +81,12 @@ $hover-color: rgba(255, 255, 255, 0.425);
       }
     }
     .left {
+      &:hover {
+        color: red;
+        border-left: 2px solid $hover-color;
+        border-right: 2px solid $hover-color;
+        color: rgb(65, 185, 131);
+      }
       display: flex;
       border-right: 1px solid rgb(56, 56, 56);
       border-left: 2px solid transparent;
@@ -86,17 +97,38 @@ $hover-color: rgba(255, 255, 255, 0.425);
           font-size: 1rem;
         }
         transition: color 0.2s;
+        // on hover change parent style
       }
-      &:hover {
-        border-left: 2px solid $hover-color;
-        border-right: 2px solid $hover-color;
-        color: rgb(65, 185, 131);
-      }
+
       .logo {
         height: 2rem;
         margin-right: 0.5rem;
         @include respond(df, tab-p) {
           height: 1.5rem;
+        }
+      }
+    }
+    .api-docs {
+      margin-right: auto;
+      padding: 0;
+      align-self: flex-end;
+      margin-left: 0.5rem;
+      margin-bottom: 0.5rem;
+      a {
+        text-decoration: none;
+        color: #fff;
+        padding: 4px;
+        border-radius: 5px;
+        font-size: 0.5rem;
+        transition: background-color 0.2s;
+        border: 1px solid rgb(65, 185, 131);
+        text-decoration: none;
+        &:hover {
+          background-color: rgb(65, 185, 131);
+        }
+        &:visited {
+          color: #fff;
+          text-decoration: none;
         }
       }
     }
