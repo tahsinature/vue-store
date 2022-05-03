@@ -1,5 +1,5 @@
 <template>
-  <div class="mt-4 mb-4">
+  <div class="home-root mt-4 mb-4">
     <app-loading
       :active.sync="isLoading"
       :is-full-page="false"
@@ -52,14 +52,14 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
+import { mapGetters } from "vuex"
 
-import ProductPreviewVue from "../components/ProductTile.vue";
-import HomeSearchBarVue from "../components/HomeSearchBar.vue";
-import CategoryVue from "../components/modals/Category.vue";
-import LocationVue from "../components/modals/Location.vue";
-import PaginationControlVue from "../components/PaginationControl.vue";
-import { productController } from "../api";
+import ProductPreviewVue from "../components/ProductTile.vue"
+import HomeSearchBarVue from "../components/HomeSearchBar.vue"
+import CategoryVue from "../components/modals/Category.vue"
+import LocationVue from "../components/modals/Location.vue"
+import PaginationControlVue from "../components/PaginationControl.vue"
+import { productController } from "../api"
 
 export default {
   data() {
@@ -73,7 +73,7 @@ export default {
       },
       currentLocation: "All over the world",
       currentCategory: "All Catrgories",
-    };
+    }
   },
   components: {
     "app-product-preview": ProductPreviewVue,
@@ -88,48 +88,54 @@ export default {
   methods: {
     getProducts(page, query) {
       // this.$store.dispatch('storeFetchedData', null);
-      this.isLoading = true;
+      this.isLoading = true
       productController
         .getAllProducts(page, query)
-        .then((result) => {
-          this.isLoading = false;
-          this.currentLocation = this.query.location ? this.query.location : "All over the world";
-          this.currentCategory = this.query.category ? this.query.category : "All Catrgories";
-          const { products } = result.data;
-          this.$store.dispatch("storeFetchedData", products);
-          this.hasNextPage = result.data.paginationInfo.hasNextPage;
+        .then(result => {
+          this.isLoading = false
+          this.currentLocation = this.query.location ? this.query.location : "All over the world"
+          this.currentCategory = this.query.category ? this.query.category : "All Catrgories"
+          const { products } = result.data
+          this.$store.dispatch("storeFetchedData", products)
+          this.hasNextPage = result.data.paginationInfo.hasNextPage
         })
         .catch(({ response }) => {
           if (response.status === 404) {
-            this.$store.dispatch("storeFetchedData", null);
-            this.isLoading = false;
+            this.$store.dispatch("storeFetchedData", null)
+            this.isLoading = false
           }
-        });
+        })
     },
   },
   watch: {
     pageNumber() {
-      this.getProducts(this.pageNumber, this.query);
+      this.getProducts(this.pageNumber, this.query)
     },
     query: {
       handler() {
-        this.pageNumber = 1;
-        this.getProducts(this.pageNumber, this.query);
+        this.pageNumber = 1
+        this.getProducts(this.pageNumber, this.query)
       },
       deep: true,
     },
   },
   created() {
-    this.getProducts(this.pageNumber, this.query);
+    this.getProducts(this.pageNumber, this.query)
   },
-};
+}
 </script>
 
 <style lang="scss" scoped>
 @import "../assets/sass/main";
 
+.home-root {
+  display: flex;
+  flex-direction: column;
+}
+
 .prods-holder,
 .no-prods {
+  height: 100%;
   padding-left: 0;
   padding-right: 0;
   background: #fff;

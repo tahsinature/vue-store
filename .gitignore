@@ -1,6 +1,5 @@
 .DS_Store
 node_modules
-/dist
 
 # local env files
 .env
@@ -19,4 +18,5 @@ yarn-error.log*
 *.sln
 *.sw*
 
-/vue-store-server/public
+/server/public
+/client/dist

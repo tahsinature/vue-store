@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="app">
     <notifications
       group="app-notification"
       position="bottom right"
@@ -21,15 +21,15 @@
 </template>
 
 <script>
-import socket from "socket.io-client";
-import HeaderVue from "./components/Header.vue";
-import CartVue from "./components/Cart.vue";
-import eventBus from "./main";
-import SideNavVue from "./components/SideNav.vue";
-import { productController, authController } from "./api";
-import config from "./config";
+import socket from "socket.io-client"
+import HeaderVue from "./components/Header.vue"
+import CartVue from "./components/Cart.vue"
+import eventBus from "./main"
+import SideNavVue from "./components/SideNav.vue"
+import { productController, authController } from "./api"
+import config from "./config"
 
-const socketOn = socket(config.apiURL);
+const socketOn = socket(config.apiURL)
 
 export default {
   methods: {
@@ -40,7 +40,7 @@ export default {
         text: "Your post is live now. <br> Don't forget to reply clients messages.",
         duration: 5000,
         type: "success ",
-      });
+      })
     },
     editPostNotification(title) {
       this.$notify({
@@ -49,7 +49,7 @@ export default {
         text: `Edit Post for <strong>${title}</strong> is successful. Have a good day.`,
         duration: 5000,
         type: "success ",
-      });
+      })
     },
     notify(options) {
       this.$notify({
@@ -58,7 +58,7 @@ export default {
         text: options.text,
         duration: 5000,
         type: options.type,
-      });
+      })
     },
     verifyAuthentication() {},
   },
@@ -68,21 +68,21 @@ export default {
     "app-nav": SideNavVue,
   },
   async created() {
-    const result = await productController.getAllProducts();
+    const result = await productController.getAllProducts()
     if (result.status === 200) {
-      const { products } = result.data;
-      this.$store.dispatch("storeFetchedData", products);
-      this.$emit("onProductLoad");
+      const { products } = result.data
+      this.$store.dispatch("storeFetchedData", products)
+      this.$emit("onProductLoad")
     }
-    eventBus.$on("onNotify", ($event) => {
-      this.notify($event);
-    });
+    eventBus.$on("onNotify", $event => {
+      this.notify($event)
+    })
     if (this.$store.getters.allNotifications.length < 1 && this.$store.getters.isLoggedIn) {
-      this.$store.dispatch("getNotificationsFromServer");
-      this.$store.dispatch("loadCart");
+      this.$store.dispatch("getNotificationsFromServer")
+      this.$store.dispatch("loadCart")
     }
 
-    this.verifyAuthentication();
+    this.verifyAuthentication()
   },
   mounted() {
     socketOn.addEventListener("newNotification", (notification, adminId, createdPackage) => {
@@ -93,12 +93,12 @@ export default {
           //   notification,
           //   createdPackage,
           // );
-          this.$store.dispatch("storeLiveNotification", notification);
+          this.$store.dispatch("storeLiveNotification", notification)
         }
       }
-    });
+    })
   },
-};
+}
 </script>
 
 <style>
@@ -115,6 +115,12 @@ p {
 <style lang="scss">
 @import "./assets/sass/main.scss";
 
+.app {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
 .v--modal-overlay {
   display: flex;
 }
@@ -126,6 +132,7 @@ p {
   @include respond(mf, tab-p) {
     display: grid;
     grid-template-columns: 5rem 1fr; //It depends on mini sidenav width.
+    height: 100%;
   }
 }
 </style>
