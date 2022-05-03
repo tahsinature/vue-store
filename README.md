@@ -11,9 +11,7 @@ docker-compose up
 
 > After running the app, it will log the activities to the console, such as api calls, scheduler jobs, etc.
 
-<br />
 <hr />
-<br />
 
 ## How to run without Docker
 
@@ -31,14 +29,10 @@ npm i && npm start
 
 > After running the app, it will log the activities to the console, such as api calls, scheduler jobs, etc.
 
-<br />
 <hr />
-<br />
 
 ## How to test
 
 - Need to add
 
-<br />
 <hr />
-<br />
