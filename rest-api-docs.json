@@ -1,0 +1,1091 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Vue-Store Rest API Doc",
+    "version": "1.0",
+    "description": "Basic APIs",
+    "contact": {}
+  },
+  "servers": [
+    {
+      "url": "http://localhost:3000",
+      "description": "Local"
+    }
+  ],
+  "tags": [
+    {
+      "name": "ping"
+    },
+    {
+      "name": "consumer"
+    }
+  ],
+  "paths": {
+    "/ping": {
+      "get": {
+        "summary": "App Health Check",
+        "tags": [
+          "ping"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "",
+                  "type": "object",
+                  "properties": {
+                    "msg": {
+                      "type": "string",
+                      "minLength": 1
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "upTime": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "dbStatus": {
+                          "type": "string",
+                          "minLength": 1
+                        }
+                      },
+                      "required": [
+                        "upTime",
+                        "dbStatus"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "msg",
+                    "data"
+                  ],
+                  "x-examples": {
+                    "example-1": {
+                      "msg": "Success",
+                      "data": {
+                        "upTime": "00:00:14",
+                        "dbStatus": "OK"
+                      }
+                    }
+                  }
+                },
+                "examples": {
+                  "db OK": {
+                    "value": {
+                      "msg": "Success",
+                      "data": {
+                        "upTime": "00:00:14",
+                        "dbStatus": "OK"
+                      }
+                    }
+                  },
+                  "db DOWN": {
+                    "value": {
+                      "msg": "Success",
+                      "data": {
+                        "upTime": "00:00:14",
+                        "dbStatus": "NOT OK"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "get-ping",
+        "description": "Health check endpoint"
+      }
+    },
+    "/energy-consumers": {
+      "get": {
+        "summary": "Get all consumers",
+        "tags": [
+          "consumer"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "",
+                  "type": "object",
+                  "x-examples": {
+                    "example-1": {
+                      "msg": "Success",
+                      "data": [
+                        {
+                          "id": "1a2696fb-3af7-42db-9a21-3478b0d55c63",
+                          "name": "Tabitha Smith",
+                          "rateClass": "Class D"
+                        },
+                        {
+                          "id": "4225d0ba-6b10-4aa8-961a-2fc69be3f91c",
+                          "name": "Ms. Florence Schimmel",
+                          "rateClass": "Class B"
+                        },
+                        {
+                          "id": "4bde3d54-f151-46f0-b118-75d3f4d24ddc",
+                          "name": "Ms. Sergio Altenwerth",
+                          "rateClass": "Class B"
+                        },
+                        {
+                          "id": "18a2fc28-ea8e-4aff-9146-e88f309b43c9",
+                          "name": "Phil Boyer",
+                          "rateClass": "Class D"
+                        },
+                        {
+                          "id": "a7bb3e67-b95b-4041-8b3c-9a0e46a60171",
+                          "name": "Ms. Desiree Littel",
+                          "rateClass": "Class A"
+                        },
+                        {
+                          "id": "a5b8b55e-7124-4243-8552-75c8387ec8c6",
+                          "name": "Courtney Gusikowski",
+                          "rateClass": "Class C"
+                        },
+                        {
+                          "id": "272bb3f3-30d7-4533-b17f-95bfd334fbb7",
+                          "name": "Andre Erdman",
+                          "rateClass": "Class D"
+                        },
+                        {
+                          "id": "b863286d-54f5-4fc3-ab0b-01d5e87e0dc4",
+                          "name": "Gene Ledner",
+                          "rateClass": "Class C"
+                        },
+                        {
+                          "id": "b507cd34-4a65-46a9-895c-6b398c2149d0",
+                          "name": "Emmett Mraz DDS",
+                          "rateClass": "Class C"
+                        },
+                        {
+                          "id": "39be3176-4ce5-44f1-bdac-b58ea9c22913",
+                          "name": "Franklin Gorczany DVM",
+                          "rateClass": "Class B"
+                        },
+                        {
+                          "id": "700722cd-f31f-4ef4-9df5-7f3477fdca67",
+                          "name": "Elbert Carroll",
+                          "rateClass": "Class B"
+                        },
+                        {
+                          "id": "bff46f63-e104-4711-8e32-9276ae8f7b12",
+                          "name": "Juan Rutherford",
+                          "rateClass": "Class B"
+                        },
+                        {
+                          "id": "ce9cfcb9-5c43-44be-b454-fbe1d3ea4dd4",
+                          "name": "Mrs. Marcos Klein",
+                          "rateClass": "Class A"
+                        },
+                        {
+                          "id": "48a8c031-f04d-4fc6-90da-c7a85370f385",
+                          "name": "Gwendolyn Harvey",
+                          "rateClass": "Class D"
+                        },
+                        {
+                          "id": "c627057e-6787-430c-8a92-ecb37a18f88d",
+                          "name": "Todd Schuster",
+                          "rateClass": "Class A"
+                        },
+                        {
+                          "id": "a3b925e7-4491-4b45-8ffb-74d16a7b8853",
+                          "name": "Mr. Brad Hills",
+                          "rateClass": "Class A"
+                        },
+                        {
+                          "id": "726b3c6f-27ab-464e-a1ef-6cb4bff0f5a1",
+                          "name": "Ralph D'Amore",
+                          "rateClass": "Class B"
+                        },
+                        {
+                          "id": "f327b1bd-ead4-4fc3-a66f-f3d5873ff621",
+                          "name": "Evan Rempel",
+                          "rateClass": "Class D"
+                        },
+                        {
+                          "id": "2c1dee5d-65a0-4410-a657-e96f86a5ff30",
+                          "name": "Bill Kirlin",
+                          "rateClass": "Class D"
+                        },
+                        {
+                          "id": "4b0d5d97-d4e9-435d-becb-e6b6b5552126",
+                          "name": "Hope Berge III",
+                          "rateClass": "Class D"
+                        },
+                        {
+                          "id": "5c2e5872-b1e2-4479-9518-7a068a0773c3",
+                          "name": "Glenda McCullough",
+                          "rateClass": "Class B"
+                        },
+                        {
+                          "id": "02e7b676-3391-4c64-b97d-81f738bf0b00",
+                          "name": "Mary Wisozk PhD",
+                          "rateClass": "Class D"
+                        },
+                        {
+                          "id": "0dffe946-fda1-4c43-8f88-6f468318b9f5",
+                          "name": "Frankie Bradtke",
+                          "rateClass": "Class C"
+                        },
+                        {
+                          "id": "27551fa9-6134-42b2-a1ce-7bcd11d4837a",
+                          "name": "Cedric Schinner",
+                          "rateClass": "Class A"
+                        },
+                        {
+                          "id": "d067859c-1fd9-444d-9dcc-3154c1aa2b9a",
+                          "name": "Jackie Schneider",
+                          "rateClass": "Class C"
+                        },
+                        {
+                          "id": "331f9eb6-f897-4147-85b3-ecc331be485a",
+                          "name": "Alejandro Runolfsdottir",
+                          "rateClass": "Class D"
+                        },
+                        {
+                          "id": "7eb5f64d-14c8-4e2b-be15-ada107f1effc",
+                          "name": "Miss Taylor Parker",
+                          "rateClass": "Class D"
+                        },
+                        {
+                          "id": "f049c222-4aca-4ceb-ae13-b7dec72635aa",
+                          "name": "Carlos Powlowski",
+                          "rateClass": "Class D"
+                        },
+                        {
+                          "id": "3349bd27-f72e-49f3-9932-fe1521fbec4b",
+                          "name": "Sabrina Stanton",
+                          "rateClass": "Class B"
+                        },
+                        {
+                          "id": "9d704609-64db-49fe-902d-5eae5f5bfb8d",
+                          "name": "Mark Mohr",
+                          "rateClass": "Class C"
+                        },
+                        {
+                          "id": "27fbbeff-2847-49e0-b73d-1e3619ee8e89",
+                          "name": "Claire Funk",
+                          "rateClass": "Class A"
+                        },
+                        {
+                          "id": "7fadda33-8086-4716-9d12-d0a037d79ada",
+                          "name": "Gayle Becker",
+                          "rateClass": "Class B"
+                        },
+                        {
+                          "id": "0ebbe73c-17db-4932-a827-0a12fe220ef0",
+                          "name": "Adam Maggio",
+                          "rateClass": "Class C"
+                        },
+                        {
+                          "id": "eb6320d5-4357-41ff-9c5f-b2fc6c9a9267",
+                          "name": "Terrence Orn",
+                          "rateClass": "Class B"
+                        },
+                        {
+                          "id": "6058c85c-828e-4657-9137-b2bfb1a32a86",
+                          "name": "Lorena Ebert IV",
+                          "rateClass": "Class A"
+                        },
+                        {
+                          "id": "d2bb1463-4ca9-4ce9-bf3d-c6dbcba16cdc",
+                          "name": "Dr. Clarence Reilly",
+                          "rateClass": "Class A"
+                        },
+                        {
+                          "id": "6e922284-f77a-4ab5-bb9b-c437fc7b070c",
+                          "name": "Terence Ferry",
+                          "rateClass": "Class B"
+                        },
+                        {
+                          "id": "908ec783-ea9d-4256-a85d-ba84d7bcc744",
+                          "name": "Tomas Mann",
+                          "rateClass": "Class B"
+                        },
+                        {
+                          "id": "795c1ad3-1c4f-4770-bc19-98a02ecac9ad",
+                          "name": "Ms. Clifton Ryan",
+                          "rateClass": "Class D"
+                        },
+                        {
+                          "id": "a941e81c-ee03-495a-9bd4-82c12c89a6f9",
+                          "name": "Ralph Schmidt",
+                          "rateClass": "Class C"
+                        },
+                        {
+                          "id": "58abe9a5-1b75-41cf-836e-5661a0c56219",
+                          "name": "Raul Connelly II",
+                          "rateClass": "Class A"
+                        },
+                        {
+                          "id": "01da8ead-ae96-40ab-a526-8b86190d8363",
+                          "name": "Lisa Cronin Jr.",
+                          "rateClass": "Class C"
+                        },
+                        {
+                          "id": "91441f3f-49ed-466b-b446-583be374ccd5",
+                          "name": "Mr. Ken Feeney",
+                          "rateClass": "Class D"
+                        },
+                        {
+                          "id": "446c2ce5-dee6-4ca8-bfac-8bb5b2b86d81",
+                          "name": "Janie Lindgren",
+                          "rateClass": "Class C"
+                        },
+                        {
+                          "id": "7e9a1eb8-4758-47ad-95b8-261099b90ee8",
+                          "name": "Geneva Ullrich",
+                          "rateClass": "Class C"
+                        },
+                        {
+                          "id": "d6ce7571-8ab2-48d1-8444-6aeeffcf6cfe",
+                          "name": "Elias Kautzer",
+                          "rateClass": "Class D"
+                        },
+                        {
+                          "id": "2220a5ba-ab9c-41b1-ae53-1506565cae15",
+                          "name": "Kathleen Huels",
+                          "rateClass": "Class B"
+                        },
+                        {
+                          "id": "dbfac283-2e54-47b6-80ba-a2dec4e34e17",
+                          "name": "Al Goodwin",
+                          "rateClass": "Class A"
+                        },
+                        {
+                          "id": "cc8b1f8b-1b3e-4b95-891f-0b229133bb9b",
+                          "name": "Cynthia Pfeffer",
+                          "rateClass": "Class A"
+                        },
+                        {
+                          "id": "6e906d50-db0a-4f32-895d-3bbc8c559fbc",
+                          "name": "Mr. Scott Predovic",
+                          "rateClass": "Class D"
+                        },
+                        {
+                          "id": "34c157b8-9bf8-4f33-b385-9a4d27600a5f",
+                          "name": "Mr. Hugo Johnson",
+                          "rateClass": "Class C"
+                        },
+                        {
+                          "id": "865bd311-a8b3-4f77-b608-d64f016e9058",
+                          "name": "Sue Fritsch",
+                          "rateClass": "Class D"
+                        },
+                        {
+                          "id": "41ede3ff-e8f0-4747-b95d-a40a4d67df3a",
+                          "name": "Al Johnston",
+                          "rateClass": "Class A"
+                        },
+                        {
+                          "id": "4e781cc3-470f-450a-92c2-72abede88677",
+                          "name": "Beatrice Hamill",
+                          "rateClass": "Class B"
+                        },
+                        {
+                          "id": "a9cbad8b-8563-4720-9b3f-ae9a90ad637a",
+                          "name": "Yolanda Hoppe",
+                          "rateClass": "Class D"
+                        },
+                        {
+                          "id": "5f03b109-4821-447d-94cc-0b1623407b05",
+                          "name": "Melody Johns",
+                          "rateClass": "Class D"
+                        },
+                        {
+                          "id": "dac3a489-b4fb-4b46-93a3-4f10884b4941",
+                          "name": "Sarah Jast",
+                          "rateClass": "Class C"
+                        },
+                        {
+                          "id": "338deb1e-2dbc-43bc-9be2-176127e6fe68",
+                          "name": "Jody Thompson",
+                          "rateClass": "Class B"
+                        },
+                        {
+                          "id": "f28ad558-7262-4550-885c-a21a755f7d98",
+                          "name": "Ms. Spencer Nader",
+                          "rateClass": "Class C"
+                        },
+                        {
+                          "id": "b2b3d81a-6460-405f-ba6c-e25921d61fb1",
+                          "name": "Wayne McKenzie",
+                          "rateClass": "Class C"
+                        },
+                        {
+                          "id": "1747f460-4407-4f29-bcd5-f14e6eb2e00c",
+                          "name": "Gilberto Weimann",
+                          "rateClass": "Class D"
+                        },
+                        {
+                          "id": "8a483a81-aab9-41a9-aae3-3f9a0c81f9cf",
+                          "name": "Marlon Rice",
+                          "rateClass": "Class B"
+                        },
+                        {
+                          "id": "8e9d6a3f-5f42-4285-973a-7834b3d11e0e",
+                          "name": "Tyrone Erdman",
+                          "rateClass": "Class A"
+                        },
+                        {
+                          "id": "daf2dbd3-417a-4b9c-926e-bcd0fce3c46e",
+                          "name": "Mrs. Misty Schultz",
+                          "rateClass": "Class A"
+                        },
+                        {
+                          "id": "b042afe2-0ff5-44de-af08-5235967bdf27",
+                          "name": "Elizabeth Bartell Jr.",
+                          "rateClass": "Class C"
+                        },
+                        {
+                          "id": "17d54e38-436a-4ac3-811c-ec1b2cb4be72",
+                          "name": "Gustavo Koch",
+                          "rateClass": "Class B"
+                        },
+                        {
+                          "id": "13ea59ad-a53f-4b49-922a-f8b259a7a3d0",
+                          "name": "Derrick Willms",
+                          "rateClass": "Class A"
+                        },
+                        {
+                          "id": "7aaa57a4-c7ad-48c3-b1e4-7ae1702edf87",
+                          "name": "Mrs. Leah Fay",
+                          "rateClass": "Class D"
+                        },
+                        {
+                          "id": "a05fecde-66fd-4972-bcc7-1c598e5a88df",
+                          "name": "Vernon Kling",
+                          "rateClass": "Class C"
+                        },
+                        {
+                          "id": "c81aaffb-15da-4a5f-bbb2-ae124589483b",
+                          "name": "Levi Schmidt",
+                          "rateClass": "Class B"
+                        },
+                        {
+                          "id": "e62d4d91-1c60-48fd-8d8e-3082d02bd44b",
+                          "name": "Kristen Reinger",
+                          "rateClass": "Class A"
+                        },
+                        {
+                          "id": "a1eeccd8-da8c-4560-836e-b094faadfd6d",
+                          "name": "Eric Runolfsdottir",
+                          "rateClass": "Class D"
+                        },
+                        {
+                          "id": "0d64b048-51b0-4082-9221-1cb0c8e26e1d",
+                          "name": "Carla Moen",
+                          "rateClass": "Class A"
+                        },
+                        {
+                          "id": "b1b1fa65-8597-41a8-835b-86a167b5e9b3",
+                          "name": "Benny Mraz",
+                          "rateClass": "Class C"
+                        },
+                        {
+                          "id": "5d8f5ea4-42dc-4ffe-9f4f-bceb54bb411f",
+                          "name": "Sue Harvey",
+                          "rateClass": "Class C"
+                        },
+                        {
+                          "id": "ccad7522-9cc5-4619-99fd-9c6253c6b3b7",
+                          "name": "Clay Bashirian",
+                          "rateClass": "Class C"
+                        },
+                        {
+                          "id": "71f2756e-a33b-4a25-b402-47db9e7ba359",
+                          "name": "Deanna Satterfield",
+                          "rateClass": "Class D"
+                        },
+                        {
+                          "id": "c37e16b8-a36a-4713-85cd-a05dcccd80f3",
+                          "name": "Darnell Koch",
+                          "rateClass": "Class A"
+                        },
+                        {
+                          "id": "3d8d35c8-97ad-4e07-b1c6-0bf911131af9",
+                          "name": "Benny Schimmel DDS",
+                          "rateClass": "Class C"
+                        },
+                        {
+                          "id": "717a0f3c-68f6-4c46-8ec5-4d556bf91345",
+                          "name": "Margie Wiza",
+                          "rateClass": "Class A"
+                        },
+                        {
+                          "id": "07581b5e-8dc3-487f-a069-94c22287bd05",
+                          "name": "Shawn Considine",
+                          "rateClass": "Class A"
+                        },
+                        {
+                          "id": "b3a48112-2f0c-43d2-81b4-600233df0662",
+                          "name": "Theresa Quigley",
+                          "rateClass": "Class C"
+                        },
+                        {
+                          "id": "ff579ffd-ca7b-4f74-939d-c70b4762eacc",
+                          "name": "Andrea Cartwright DVM",
+                          "rateClass": "Class D"
+                        },
+                        {
+                          "id": "a54f8901-141f-4d00-9f60-7d3a3bd47562",
+                          "name": "Santiago Bergnaum V",
+                          "rateClass": "Class B"
+                        },
+                        {
+                          "id": "850d6953-81ce-41aa-98a9-7bc2c8002f3b",
+                          "name": "Rebecca Krajcik",
+                          "rateClass": "Class C"
+                        },
+                        {
+                          "id": "17c408ae-7a91-4aca-9254-8e3c01fb9dba",
+                          "name": "Norma Bruen",
+                          "rateClass": "Class A"
+                        },
+                        {
+                          "id": "f311d426-0309-4e97-99d7-ea6e9592bfd9",
+                          "name": "Vivian Predovic",
+                          "rateClass": "Class D"
+                        },
+                        {
+                          "id": "c6e55901-93ed-4408-84bb-9d7503bb813b",
+                          "name": "Jessie Lubowitz",
+                          "rateClass": "Class A"
+                        },
+                        {
+                          "id": "5d49a2f2-6f1c-4503-85e5-e37a6f695072",
+                          "name": "Leah Williamson",
+                          "rateClass": "Class B"
+                        },
+                        {
+                          "id": "c95b63c9-72d8-41ea-bf9e-7789801acd17",
+                          "name": "Woodrow Hermiston",
+                          "rateClass": "Class A"
+                        },
+                        {
+                          "id": "649719a1-7376-4f7b-94b2-ec2259c3c3a9",
+                          "name": "Grace Heathcote",
+                          "rateClass": "Class B"
+                        },
+                        {
+                          "id": "15c83fa3-37af-4369-84ee-5e521edb30d4",
+                          "name": "Stanley Rau DVM",
+                          "rateClass": "Class A"
+                        },
+                        {
+                          "id": "0cb10737-fc5f-41c8-a989-27e4c9a9c4cd",
+                          "name": "Nicole Thompson",
+                          "rateClass": "Class A"
+                        },
+                        {
+                          "id": "87fb9ea1-851f-4ac3-a63e-0e4e41196d5e",
+                          "name": "Leroy McClure",
+                          "rateClass": "Class C"
+                        },
+                        {
+                          "id": "b1aeaee8-a037-4e94-b011-9abc44ab9a25",
+                          "name": "Christina Labadie",
+                          "rateClass": "Class A"
+                        },
+                        {
+                          "id": "16b5c51d-eb91-4834-9107-c55741354958",
+                          "name": "Stewart Lemke",
+                          "rateClass": "Class D"
+                        },
+                        {
+                          "id": "8865bb35-91fd-4b59-afa9-d5e541dad4e3",
+                          "name": "Annie Berge",
+                          "rateClass": "Class C"
+                        },
+                        {
+                          "id": "e0204fd8-f0dd-40dc-b3bd-7462633800f0",
+                          "name": "Raquel Bogisich",
+                          "rateClass": "Class A"
+                        },
+                        {
+                          "id": "0717e47a-bdec-4764-9bb5-8bf9df9f1758",
+                          "name": "Erma Orn",
+                          "rateClass": "Class A"
+                        },
+                        {
+                          "id": "2e228be6-16ea-440d-aa64-ee373af825b3",
+                          "name": "Andy Muller",
+                          "rateClass": "Class D"
+                        }
+                      ]
+                    }
+                  },
+                  "properties": {
+                    "msg": {
+                      "type": "string",
+                      "minLength": 1
+                    },
+                    "data": {
+                      "type": "array",
+                      "uniqueItems": true,
+                      "minItems": 0,
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "string",
+                            "minLength": 1
+                          },
+                          "name": {
+                            "type": "string",
+                            "minLength": 1
+                          },
+                          "rateClass": {
+                            "type": "string",
+                            "minLength": 1
+                          }
+                        },
+                        "required": [
+                          "id",
+                          "name",
+                          "rateClass"
+                        ]
+                      }
+                    }
+                  },
+                  "required": [
+                    "msg",
+                    "data"
+                  ]
+                },
+                "examples": {
+                  "Data Available": {
+                    "value": {
+                      "msg": "Success",
+                      "data": [
+                        {
+                          "id": "1a2696fb-3af7-42db-9a21-3478b0d55c63",
+                          "name": "Tabitha Smith",
+                          "rateClass": "Class D"
+                        },
+                        {
+                          "id": "4225d0ba-6b10-4aa8-961a-2fc69be3f91c",
+                          "name": "Ms. Florence Schimmel",
+                          "rateClass": "Class B"
+                        },
+                        {
+                          "id": "4bde3d54-f151-46f0-b118-75d3f4d24ddc",
+                          "name": "Ms. Sergio Altenwerth",
+                          "rateClass": "Class B"
+                        }
+                      ]
+                    }
+                  },
+                  "Empty Data": {
+                    "value": {
+                      "msg": "Success",
+                      "data": []
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "get-energy-consumers",
+        "description": "Get all the consumers"
+      }
+    },
+    "/energy-consumers/{user-id}": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string",
+            "example": "random-user"
+          },
+          "name": "user-id",
+          "in": "path",
+          "required": true,
+          "description": "ID of the consumer"
+        }
+      ],
+      "put": {
+        "summary": "Update user data",
+        "operationId": "put-energy-consumers-user-id",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "",
+                  "type": "object",
+                  "properties": {
+                    "msg": {
+                      "type": "string",
+                      "minLength": 1
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "name": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "rateClass": {
+                          "type": "string",
+                          "minLength": 1
+                        }
+                      },
+                      "required": [
+                        "id",
+                        "name",
+                        "rateClass"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "msg",
+                    "data"
+                  ],
+                  "x-examples": {
+                    "example-1": {
+                      "msg": "Success",
+                      "data": {
+                        "id": "8ab99e92-a835-48a9-9553-1d6f78f30929",
+                        "name": "test",
+                        "rateClass": "Class ABC"
+                      }
+                    }
+                  }
+                },
+                "examples": {
+                  "example-1": {
+                    "value": {
+                      "msg": "Success",
+                      "data": {
+                        "id": "8ab99e92-a835-48a9-9553-1d6f78f30929",
+                        "name": "John Doe",
+                        "rateClass": "Clas-A"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "",
+                  "type": "object",
+                  "properties": {
+                    "msg": {
+                      "type": "string",
+                      "minLength": 1
+                    },
+                    "data": {}
+                  },
+                  "required": [
+                    "msg"
+                  ],
+                  "x-examples": {
+                    "example-1": {
+                      "msg": "\"rateClass\" must be one of [Class A, Class B, Class C, Class D]",
+                      "data": null
+                    }
+                  }
+                },
+                "examples": {
+                  "invalid rateClass": {
+                    "value": {
+                      "msg": "\"rateClass\" must be one of [Class A, Class B, Class C, Class D]",
+                      "data": null
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "",
+                  "type": "object",
+                  "properties": {
+                    "msg": {
+                      "type": "string",
+                      "minLength": 1
+                    },
+                    "data": {}
+                  },
+                  "required": [
+                    "msg"
+                  ],
+                  "x-examples": {
+                    "example-1": {
+                      "msg": "User with id b59572f6-887d-4e46-bb3b-5510c82b07d2 not found",
+                      "data": null
+                    }
+                  }
+                },
+                "examples": {
+                  "example-1": {
+                    "value": {
+                      "msg": "User with id b59572f6-887d-4e46-bb3b-5510c82b07d2 not found",
+                      "data": null
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "description": "Update a user data",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "description": "",
+                "type": "object",
+                "x-examples": {
+                  "example-1": {
+                    "name": "test",
+                    "rateClass": "Class-A"
+                  }
+                },
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "rateClass": {
+                    "type": "string",
+                    "minLength": 1,
+                    "enum": [
+                      "Class A",
+                      "Class B",
+                      "Class C",
+                      "Class D"
+                    ],
+                    "default": "Class A"
+                  }
+                },
+                "required": [
+                  "name",
+                  "rateClass"
+                ]
+              },
+              "examples": {
+                "example-1": {
+                  "value": {
+                    "name": "John Doe",
+                    "rateClass": "Class A"
+                  }
+                }
+              }
+            }
+          },
+          "description": "all the valid passed properties will be updated to user table"
+        },
+        "tags": [
+          "consumer"
+        ]
+      }
+    },
+    "/usage-records/{user-id}": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string",
+            "example": "random-user"
+          },
+          "name": "user-id",
+          "in": "path",
+          "required": true,
+          "description": "ID of the consumer"
+        }
+      ],
+      "get": {
+        "summary": "Get consumption logs",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "",
+                  "type": "object",
+                  "x-examples": {
+                    "example-1": {
+                      "msg": "Success",
+                      "data": {
+                        "userId": "54e4c09b-443b-4c4b-8cb0-4ad70109f08c",
+                        "consumptions": [
+                          {
+                            "id": "26936ae0-fafe-44c7-bdb4-cca09b98bcce",
+                            "start": "2022-04-30T10:26:56.112Z",
+                            "usage": 601.4,
+                            "unitCost": 3.15,
+                            "unit": "CAD/KWH"
+                          },
+                          {
+                            "id": "3f13acfb-a7d5-4136-b4ab-a8770c998bff",
+                            "start": "2022-04-30T13:32:25.225Z",
+                            "usage": 1244.6,
+                            "unitCost": 3.59,
+                            "unit": "CAD/KWH"
+                          }
+                        ],
+                        "summary": {
+                          "totalUsage": "1846.00 KWh",
+                          "totalCost": "CAD 6362.52"
+                        }
+                      }
+                    }
+                  },
+                  "properties": {
+                    "msg": {
+                      "type": "string",
+                      "minLength": 1
+                    },
+                    "data": {
+                      "type": "object",
+                      "required": [
+                        "userId",
+                        "consumptions",
+                        "summary"
+                      ],
+                      "properties": {
+                        "userId": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "consumptions": {
+                          "type": "array",
+                          "uniqueItems": true,
+                          "minItems": 0,
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "id": {
+                                "type": "string",
+                                "minLength": 1
+                              },
+                              "start": {
+                                "type": "string",
+                                "minLength": 1
+                              },
+                              "usage": {
+                                "type": "number"
+                              },
+                              "unitCost": {
+                                "type": "number"
+                              },
+                              "unit": {
+                                "type": "string",
+                                "minLength": 1
+                              }
+                            },
+                            "required": [
+                              "id",
+                              "start",
+                              "usage",
+                              "unitCost",
+                              "unit"
+                            ]
+                          }
+                        },
+                        "summary": {
+                          "type": "object",
+                          "required": [
+                            "totalUsage",
+                            "totalCost"
+                          ],
+                          "properties": {
+                            "totalUsage": {
+                              "type": "string",
+                              "minLength": 1
+                            },
+                            "totalCost": {
+                              "type": "string",
+                              "minLength": 1
+                            }
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "required": [
+                    "msg",
+                    "data"
+                  ]
+                },
+                "examples": {
+                  "empty consumptions": {
+                    "value": {
+                      "msg": "Success",
+                      "data": {
+                        "userId": "5bc3d7c5-73fd-414e-bf9e-b614767259c3",
+                        "consumptions": [],
+                        "summary": {
+                          "totalUsage": "143.30 KWh",
+                          "totalCost": "CAD 4.15"
+                        }
+                      }
+                    }
+                  },
+                  "with consumptions": {
+                    "value": {
+                      "msg": "Success",
+                      "data": {
+                        "userId": "54e4c09b-443b-4c4b-8cb0-4ad70109f08c",
+                        "consumptions": [
+                          {
+                            "id": "26936ae0-fafe-44c7-bdb4-cca09b98bcce",
+                            "start": "2022-04-30T10:26:56.112Z",
+                            "usage": 601.4,
+                            "unitCost": 3.15,
+                            "unit": "CAD/KWH"
+                          },
+                          {
+                            "id": "3f13acfb-a7d5-4136-b4ab-a8770c998bff",
+                            "start": "2022-04-30T13:32:25.225Z",
+                            "usage": 1244.6,
+                            "unitCost": 3.59,
+                            "unit": "CAD/KWH"
+                          }
+                        ],
+                        "summary": {
+                          "totalUsage": "1846.00 KWh",
+                          "totalCost": "CAD 6362.52"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "get-usage-records-user-id",
+        "description": "Get consumption logs for a user",
+        "tags": [
+          "consumer"
+        ]
+      }
+    }
+  },
+  "components": {
+    "schemas": {}
+  }
+}
