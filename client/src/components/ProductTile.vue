@@ -3,9 +3,7 @@
     <div class="product-preview__left">
       <img
         class="product-preview__left--img"
-        v-lazy="
-          product.images[0] ? product.images[0].url : 'https://www.shopgro.in/img/no-image.png'
-        "
+        v-lazy="product.images[0].url"
       />
     </div>
     <div class="product-preview__right" ref="textSpace">
@@ -32,23 +30,23 @@ export default {
   data() {
     return {
       shouldScroll: false,
-    };
+    }
   },
 
   mounted() {
-    const parentWidth = this.$refs.textSpace.offsetWidth;
-    const textWidth = this.$refs.titleText.scrollWidth;
+    const parentWidth = this.$refs.textSpace.offsetWidth
+    const textWidth = this.$refs.titleText.scrollWidth
 
-    this.shouldScroll = textWidth > parentWidth;
+    this.shouldScroll = textWidth > parentWidth
   },
 
   props: ["product"],
   methods: {
     gotoDetails() {
-      this.$router.push(`products/${this.product._id}`);
+      this.$router.push(`products/${this.product._id}`)
     },
   },
-};
+}
 </script>
 
 <style lang="scss" scoped>

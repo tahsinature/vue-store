@@ -1,33 +1,20 @@
 version: "3.9"
 
 services:
-  api:
-    build: .
-    ports:
-      - "3000"
-    env_file:
-      - .env
+  app:
+    image: tahsinature/vue-store:latest
+    environment:
+      DOPPLER_TOKEN: $DOPPLER_TOKEN_MY_PERSONAL
+      DOPPLER_PROJECT: vue-store
+      DOPPLER_CONFIG: prd
     labels:
       - traefik.enable=true
-      - traefik.http.routers.vue-store-server.rule=Host(`vue-store-server.tahsin.us`)
-      - traefik.http.routers.vue-store-server.entrypoints=websecure
-      - traefik.http.services.vue-store-server.loadbalancer.server.port=3000
-      - traefik.http.routers.vue-store-server.tls=true
-      - traefik.http.routers.vue-store-server.tls.certresolver=myresolver
-    networks:
-      - traefik
-
-  web:
-    build:
-      context: .
-      dockerfile: docker-prod.dockerfile
-    labels:
-      - traefik.enable=true
-      - traefik.http.routers.vue-store-client.rule=Host(`vue-store.tahsin.us`)
-      - traefik.http.routers.vue-store-client.entrypoints=websecure
-      - traefik.http.services.vue-store-client.loadbalancer.server.port=80
-      - traefik.http.routers.vue-store-client.tls=true
-      - traefik.http.routers.vue-store-client.tls.certresolver=myresolver
+      - traefik.http.routers.vue-store.rule=Host(`vue-store.tahsin.us`)
+      - traefik.http.routers.vue-store.entrypoints=websecure
+      - traefik.http.services.vue-store.loadbalancer.server.port=3000
+      - traefik.http.routers.vue-store.tls=true
+      - traefik.http.routers.vue-store.tls.certresolver=myresolver
+    entrypoint: sh -c './scripts/get-env && npm start'
     networks:
       - traefik
 

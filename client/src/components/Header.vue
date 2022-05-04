@@ -1,9 +1,9 @@
 <template>
   <div class="nav">
     <div class="container">
-      <div class="left">
+      <div class="left" @click="toggleNav()">
         <img class="logo" src="../assets/images/logo.png" alt>
-          <h5 @click="toggleNav()">Vue Store</h5>
+          <h5>Vue Store</h5>
       </div>
       <div class="api-docs">
         <a href="http://localhost:8080/docs.html" target="_blank">

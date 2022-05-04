@@ -27,18 +27,22 @@
 
 <script>
 export default {
-  props: ['pageNumber', 'hasNextPage'],
-};
+  props: ["pageNumber", "hasNextPage"],
+}
 </script>
 
 <style lang="scss" scoped>
 .pagination-control {
-  margin-top: 2rem;
   font-size: 0.8rem;
   padding: 2rem;
   text-align: center;
+  margin-top: auto;
   nav {
     display: inline-block;
   }
+}
+
+.pagination {
+  margin: 0;
 }
 </style>

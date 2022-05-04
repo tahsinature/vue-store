@@ -101,67 +101,57 @@ export default {
       magicNumber: [3, 4, 5, 6, 7, -3, -4, -5, -6, -7],
       techs: [
         {
-          title: 'Node.js',
-          description:
-            'Runtime environment for Javascript to run JavaScript outside of the browser.',
+          title: "Node.js",
+          description: "Runtime environment for Javascript to run JavaScript outside of the browser.",
         },
         {
-          title: 'Express.js',
-          description:
-            'Most popular framework for Node Applications designed for building web applications and APIs.',
+          title: "Express.js",
+          description: "Most popular framework for Node Applications designed for building web applications and APIs.",
         },
         {
-          title: 'Vue.js',
-          description:
-            'One of the popular frameworks out there in 2019 for building UI. Other two players are Angular & React.',
+          title: "Vue.js",
+          description: "One of the popular frameworks out there in 2019 for building UI. Other two players are Angular & React.",
         },
         {
-          title: 'Vuex',
-          description:
-            'Vuex is a state management pattern + library for Vue.js applications for serving as a centralized store for all components..',
+          title: "Vuex",
+          description: "Vuex is a state management pattern + library for Vue.js applications for serving as a centralized store for all components..",
         },
         {
-          title: 'Mongodb',
-          description:
-            'One of the popular databases and most popular database with Node Application.',
+          title: "Mongodb",
+          description: "One of the popular databases and most popular database with Node Application.",
         },
         {
-          title: 'Firebase',
-          description:
-            "I've used firebase to host Vue SPA. There were other options though like Amazon S3.",
+          title: "Firebase Storage",
+          description: "I've used firebase storage to store static assets. There were other options though like Amazon S3.",
         },
         {
-          title: 'Socket.io',
-          description:
-            "I've used Socket.io to give the feeling of realtime push notification Service to the users & update contents live.",
+          title: "Socket.io",
+          description: "I've used Socket.io to give the feeling of realtime push notification Service to the users & update contents live.",
         },
         {
-          title: 'Bcrypt',
-          description:
-            'Bcrypt is a password hashing function based on the Blowfish block cipher cryptomatic algorithm and takes the form of an adaptive hash function.',
+          title: "Bcrypt",
+          description: "Bcrypt is a password hashing function based on the Blowfish block cipher cryptomatic algorithm and takes the form of an adaptive hash function.",
         },
         {
-          title: 'JWT',
-          description: 'Used JWT (JSON Web Token) to track user authentication.',
+          title: "JWT",
+          description: "Used JWT (JSON Web Token) to track user authentication.",
         },
         {
-          title: 'Axios',
+          title: "Axios",
           description: "I've used Axios over Vue-Resource to send AJAX request.",
         },
         {
-          title: 'Multer and Cloudinary',
-          description:
-            "To upload files to the server and I've used cloudinary to host images via CDN.",
+          title: "Multer",
+          description: "To upload files to the server.",
         },
         {
-          title: 'Sass',
-          description:
-            'CSS preprocessor. Sass is an extension of CSS3, adding nested rules, variables, mixins, selector inheritance, and more.',
+          title: "Sass",
+          description: "CSS preprocessor. Sass is an extension of CSS3, adding nested rules, variables, mixins, selector inheritance, and more.",
         },
       ],
-    };
+    }
   },
-};
+}
 </script>
 
 <style lang="scss" scoped>

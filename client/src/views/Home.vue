@@ -142,6 +142,8 @@ export default {
   border: 2px solid gainsboro;
   border-radius: 5px;
   width: 70%;
+  display: flex;
+  flex-direction: column;
   @include respond(df, tab-p) {
     width: 90%;
   }

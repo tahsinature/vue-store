@@ -47,7 +47,7 @@ const exec = async () => {
         io.emit("onReviewMade", productId, review)
       })
     })
-    logger.app(`Listening on port: ${config.appPort}`)
+    logger.app.info(`Listening on port: ${config.appPort}`)
   })
 }
 
