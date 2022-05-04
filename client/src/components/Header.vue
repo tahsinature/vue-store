@@ -33,7 +33,7 @@ import eventBus from "../main"
 export default {
   data() {
     return {
-      apiDocURL: `${config.apiURL}docs/rest?format=html`,
+      apiDocURL: `${config.apiURL}/docs/rest?format=html`,
     }
   },
   methods: {
