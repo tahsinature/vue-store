@@ -6,7 +6,7 @@
           <h5>Vue Store</h5>
       </div>
       <div class="api-docs">
-        <a href="http://localhost:8080/docs.html" target="_blank">
+        <a :href="apiDocURL" target="_blank">
           API Docs
         </a>
       </div>
@@ -27,9 +27,15 @@
 
 <script>
 import { mapGetters } from "vuex"
+import config from "../config"
 import eventBus from "../main"
 
 export default {
+  data() {
+    return {
+      apiDocURL: `${config.apiURL}docs/rest?format=html`,
+    }
+  },
   methods: {
     toggleNav() {
       eventBus.$emit("onToggleNav")
@@ -140,8 +146,6 @@ $hover-color: rgba(255, 255, 255, 0.425);
         border-left: 2px solid $hover-color;
       }
       .my-cart {
-        // display: flex;
-        // align-items: center;
         i {
           font-size: 2rem;
           position: relative;

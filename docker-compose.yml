@@ -2,6 +2,7 @@ version: "3.9"
 
 services:
   frontend:
+    tty: true
     build:
       context: .
       dockerfile: ./client/Dockerfile
@@ -21,6 +22,8 @@ services:
       - "3000:3000"
     depends_on:
       - db
+    environment:
+      - DB_URI=mongodb://db/e-market
     volumes:
       - ./server:/app
       - /app/node_modules
