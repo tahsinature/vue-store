@@ -701,6 +701,38 @@
         "description": "Get all the consumers"
       },
       "parameters": []
+    },
+    "/auth": {
+      "get": {
+        "summary": "Check availability",
+        "tags": [
+          "auth"
+        ],
+        "responses": {},
+        "operationId": "get-auth",
+        "description": "only one property has to be passed",
+        "parameters": [
+          {
+            "schema": {
+              "type": "string",
+              "example": "john"
+            },
+            "in": "query",
+            "name": "userName",
+            "description": "username to check"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "example": "john@mail.com"
+            },
+            "in": "query",
+            "name": "email",
+            "description": "email to check"
+          }
+        ]
+      },
+      "parameters": []
     }
   },
   "components": {

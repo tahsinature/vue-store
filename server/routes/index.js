@@ -3,6 +3,7 @@ const staticRoutes = require("express").Router()
 
 staticRoutes.use("/", require("./home"))
 
+apiRoutes.use("/ping", require("./ping"))
 apiRoutes.use("/docs", require("./docs"))
 apiRoutes.use("/auth", require("./auth"))
 apiRoutes.use("/products", require("./product"))
