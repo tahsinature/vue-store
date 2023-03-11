@@ -17,7 +17,6 @@ RUN echo "deb [ arch=amd64,arm64 ] https://repo.mongodb.org/apt/ubuntu bionic/mo
 RUN apt-get update
 RUN apt-get install -y mongodb-org=4.2.18
 RUN mkdir -p /data/db
-COPY server/test.js /test.js
 
 # nvm
 ENV NVM_DIR "$HOME/.nvm"
