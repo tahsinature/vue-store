@@ -24,7 +24,10 @@
       </div>
     </div>
     <div class="form">
-      <h1 class="form-title">{{mode}} User</h1>
+      <div class="form-title-box">
+        <h1 class="form-title">{{mode}} User</h1> <span v-if="mode === 'login'"><small><code>Dummy User: john / 12345678</code></small></span>
+      </div>
+      
       <form v-if="mode === 'login'" @submit.prevent="handleLogin">
         <div class="form-group">
           <input
@@ -283,47 +286,47 @@
 </template>
 
 <script>
-import imageUploader from 'vue-upload-multiple-image';
-import axios from 'axios';
-import ImageCompressor from 'image-compressor.js';
-import firebase from 'firebase';
-import eventBus from '../main';
-import { authController, mediaController } from '../api';
-import store from '../store/store';
+import imageUploader from "vue-upload-multiple-image"
+import axios from "axios"
+import ImageCompressor from "image-compressor.js"
+import firebase from "firebase"
+import eventBus from "../main"
+import { authController, mediaController } from "../api"
+import store from "../store/store"
 
 export default {
   components: {
-    'image-uploader': imageUploader,
+    "image-uploader": imageUploader,
   },
   data() {
     return {
       mode: undefined,
       userInfo: {
-        fullName: '',
-        userName: '',
-        email: '',
-        password: '',
-        contactNo: '',
+        fullName: "",
+        userName: "",
+        email: "",
+        password: "",
+        contactNo: "",
         profilePhoto: null,
-        gender: 'Male',
+        gender: "Male",
         location: null,
-        address: '',
-        bio: '',
+        address: "",
+        bio: "",
       },
       loginInfo: {
-        userName: '',
-        password: '',
+        userName: "",
+        password: "",
         rememberPassword: false,
       },
       locations: [
-        { name: 'Select Location', value: null },
-        { name: 'Asia', value: 'asia' },
-        { name: 'Africa', value: 'africa' },
-        { name: 'North America', value: 'north-america' },
-        { name: 'South America', value: 'south-america' },
-        { name: 'Antartica', value: 'antartica' },
-        { name: 'Europe', value: 'europe' },
-        { name: 'Australia', value: 'australia' },
+        { name: "Select Location", value: null },
+        { name: "Asia", value: "asia" },
+        { name: "Africa", value: "africa" },
+        { name: "North America", value: "north-america" },
+        { name: "South America", value: "south-america" },
+        { name: "Antartica", value: "antartica" },
+        { name: "Europe", value: "europe" },
+        { name: "Australia", value: "australia" },
       ],
       userNameStatus: null,
       emailStatus: null,
@@ -334,122 +337,118 @@ export default {
       uploadProgress: 0,
       isUploading: false,
       finalImage: null,
-    };
+    }
   },
   watch: {
     $route(to, from) {
-      this.mode = to.path.split('/')[1];
+      this.mode = to.path.split("/")[1]
     },
   },
   methods: {
     checkUserName() {
-      if (this.errors.has('userName') || !this.userInfo.userName) return;
+      if (this.errors.has("userName") || !this.userInfo.userName) return
 
-      this.userNameStatus = 'checking';
+      this.userNameStatus = "checking"
       authController
         .checkAvailablity({ userName: this.userInfo.userName })
-        .then((res) => {
-          if (res.status === 200) return (this.userNameStatus = 'ok');
+        .then(res => {
+          if (res.status === 200) return (this.userNameStatus = "ok")
         })
-        .catch((err) => {
+        .catch(err => {
           if (err.response.status === 409) {
-            return (this.userNameStatus = 'taken');
+            return (this.userNameStatus = "taken")
           }
-        });
+        })
     },
     checkEmail() {
-      if (this.errors.has('email') || !this.userInfo.email) return;
+      if (this.errors.has("email") || !this.userInfo.email) return
 
-      this.emailStatus = 'checking';
+      this.emailStatus = "checking"
       authController
         .checkAvailablity({ email: this.userInfo.email })
-        .then((res) => {
-          if (res.status === 200) return (this.emailStatus = 'ok');
+        .then(res => {
+          if (res.status === 200) return (this.emailStatus = "ok")
         })
-        .catch((err) => {
+        .catch(err => {
           if (err.response.status === 409) {
-            return (this.emailStatus = 'taken');
+            return (this.emailStatus = "taken")
           }
-        });
+        })
     },
     beforeRemove() {
-      this.$refs.imageUploader.images = [];
-      this.userInfo.profilePhoto = null;
-      this.imgWarning = true;
+      this.$refs.imageUploader.images = []
+      this.userInfo.profilePhoto = null
+      this.imgWarning = true
     },
     uploadMedia(formData, index, files) {
-      const vm = this;
+      const vm = this
       function generateUserPreview(file) {
-        const fileReader = new FileReader();
-        fileReader.addEventListener('load', () => {
-          vm.finalImage = fileReader.result;
-        });
-        fileReader.readAsDataURL(file);
+        const fileReader = new FileReader()
+        fileReader.addEventListener("load", () => {
+          vm.finalImage = fileReader.result
+        })
+        fileReader.readAsDataURL(file)
       }
-      if (this.selectedImages) return;
-      this.imgWarning = false;
-      const file = formData.getAll('file')[0];
+      if (this.selectedImages) return
+      this.imgWarning = false
+      const file = formData.getAll("file")[0]
       // eslint-disable-next-line no-new
       new ImageCompressor(file, {
         quality: 0.1,
         success(compressedFile) {
           // eslint-disable-next-line no-use-before-define
-          uploadToFirebase(compressedFile);
+          uploadToFirebase(compressedFile)
         },
         error(e) {
-          console.log(e);
+          console.log(e)
         },
-      });
+      })
       function uploadToFirebase(compressedFile) {
         const uploadTask = firebase
           .storage()
-          .ref(
-            `user-${
-              vm.userInfo.userName ? vm.userInfo.userName : 'UnkownUser'
-            }-${Date.now(compressedFile.name)}`,
-          )
-          .put(compressedFile);
-        uploadTask.then((response) => {
-          response.ref.getDownloadURL().then((url) => {
-            generateUserPreview(compressedFile);
-            vm.userInfo.profilePhoto = {};
-            vm.userInfo.profilePhoto.url = url;
-            vm.isUploading = false;
-            vm.uploadProgress = 0;
-          });
-        });
-        uploadTask.on(firebase.storage.TaskEvent.STATE_CHANGED, (snapshot) => {
-          vm.isUploading = true;
+          .ref(`user-${vm.userInfo.userName ? vm.userInfo.userName : "UnkownUser"}-${Date.now(compressedFile.name)}`)
+          .put(compressedFile)
+        uploadTask.then(response => {
+          response.ref.getDownloadURL().then(url => {
+            generateUserPreview(compressedFile)
+            vm.userInfo.profilePhoto = {}
+            vm.userInfo.profilePhoto.url = url
+            vm.isUploading = false
+            vm.uploadProgress = 0
+          })
+        })
+        uploadTask.on(firebase.storage.TaskEvent.STATE_CHANGED, snapshot => {
+          vm.isUploading = true
           // eslint-disable-next-line no-multi-spaces
-          vm.uploadProgress =            (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-        });
+          vm.uploadProgress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+        })
       }
     },
     handleSubmit() {
-      this.$validator.validateAll().then((valid) => {
+      this.$validator.validateAll().then(valid => {
         if (!valid || this.imgWarning || !this.userInfo.profilePhoto) {
-          this.imgWarning = true;
-          return this.$emit('onNotify', {
-            title: 'Oops, Bad Inputs',
-            text: 'Please check and double check the requirements.',
-            type: 'error',
-          });
+          this.imgWarning = true
+          return this.$emit("onNotify", {
+            title: "Oops, Bad Inputs",
+            text: "Please check and double check the requirements.",
+            type: "error",
+          })
         }
-        this.isProcessing = true;
+        this.isProcessing = true
         authController
           .registerUser(this.userInfo)
           .then(() => {
-            this.$emit('onNotify', {
-              title: 'Registration Successful',
-              text: 'Please Login with your credentials. .😃',
-              type: 'success',
-            });
-            this.$router.push('/login');
+            this.$emit("onNotify", {
+              title: "Registration Successful",
+              text: "Please Login with your credentials. .😃",
+              type: "success",
+            })
+            this.$router.push("/login")
           })
-          .catch((err) => {
-            this.isProcessing = false;
-          });
-      });
+          .catch(err => {
+            this.isProcessing = false
+          })
+      })
     },
     handleEdit() {
       authController
@@ -464,75 +463,75 @@ export default {
         })
         .then(({ data, status }) => {
           if (status === 200) {
-            this.$store.dispatch('setAdmin', data);
-            this.$store.dispatch('setSelectedUser', data);
+            this.$store.dispatch("setAdmin", data)
+            this.$store.dispatch("setSelectedUser", data)
             authController.getUser(data._id).then(({ data }) => {
-              this.$store.dispatch('setSelectedUser', data);
-              this.$router.push('/me');
-            });
-            this.$emit('onNotify', {
-              title: 'Profile Successfully Saved',
+              this.$store.dispatch("setSelectedUser", data)
+              this.$router.push("/me")
+            })
+            this.$emit("onNotify", {
+              title: "Profile Successfully Saved",
               text: `${data.fullName}, you successfully edited your profile`,
-              type: 'success',
-            });
+              type: "success",
+            })
           }
         })
         .catch(({ response }) => {
-          console.log(response);
-          this.$emit('onNotify', {
-            title: 'Edit Failed',
-            text: 'Sorry,  something went wrong. Please check your inputs.',
-            type: 'error',
-          });
-        });
+          console.log(response)
+          this.$emit("onNotify", {
+            title: "Edit Failed",
+            text: "Sorry,  something went wrong. Please check your inputs.",
+            type: "error",
+          })
+        })
     },
     handleLogin() {
       authController
         .loginUser(this.loginInfo)
-        .then((response) => {
-          localStorage.setItem('token', response.data['x-auth-token']);
+        .then(response => {
+          localStorage.setItem("token", response.data["x-auth-token"])
           // this.$store.dispatch('setAdmin', response.data.user);
           // this.$store.dispatch('makeIsLoggedInTrue');
           // this.$router.push('/me');
-          window.location.reload();
-          this.$emit('onNotify', {
-            title: 'Login Successfull',
+          window.location.reload()
+          this.$emit("onNotify", {
+            title: "Login Successfull",
             text: `Welcome ${response.data.user.fullName} to your profile.`,
-            type: 'success',
-          });
+            type: "success",
+          })
         })
-        .catch((err) => {
-          this.$emit('onNotify', {
+        .catch(err => {
+          this.$emit("onNotify", {
             title: err.response.statusText,
             text: err.response.data.message.errorMessage,
-            type: 'error',
-          });
-        });
+            type: "error",
+          })
+        })
     },
   },
   beforeMount() {
-    this.mode = this.$route.fullPath.split('/').pop();
-    if (this.mode === 'edit') {
-      this.userInfo = this.$store.getters.getAdmin;
+    this.mode = this.$route.fullPath.split("/").pop()
+    if (this.mode === "edit") {
+      this.userInfo = this.$store.getters.getAdmin
     }
   },
   beforeRouteEnter(to, from, next) {
-    if (to.fullPath.split('/').pop() === 'edit') {
+    if (to.fullPath.split("/").pop() === "edit") {
       if (store.getters.isLoggedIn) {
-        next();
+        next()
       } else {
-        next('login');
+        next("login")
       }
     } else if (store.getters.isLoggedIn) {
-      next('/me');
+      next("/me")
     } else {
-      next();
+      next()
     }
   },
   deactivated() {
-    this.$destroy();
+    this.$destroy()
   },
-};
+}
 </script>
 
 <style lang="scss" scoped>
@@ -565,6 +564,20 @@ export default {
     align-items: center;
     img {
       width: 40px;
+      margin-right: 0.5rem;
+    }
+  }
+}
+
+.form {
+  &-title-box {
+    display: flex;
+    align-items: baseline;
+    small,
+    small > * {
+      color: rgba(255, 255, 255, 0.482);
+    }
+    .form-title {
       margin-right: 0.5rem;
     }
   }

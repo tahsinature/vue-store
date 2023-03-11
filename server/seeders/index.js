@@ -23,7 +23,9 @@ class Seeder {
     const otherUsers = await this.files.user.createMany(10)
     logger.db.info(`Other Users Created: ${otherUsers.length}`)
 
-    const mainUser = await this.files.user.createOne()
+    const mainUser = await this.files.user.createOne({
+      userName: "john",
+    })
     logger.db.info(`User created: ${mainUser.userName}, password: ${config.defaultPassword}`)
 
     await this.files.user.addUserContact(mainUser, otherUsers)

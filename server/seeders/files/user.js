@@ -2,19 +2,19 @@ const config = require("../../config")
 const BaseSeeder = require("../baseSeeder")
 
 class ProductSeeder extends BaseSeeder {
-  async createOne({ password = config.defaultPassword, email = this.faker.internet.email().toLowerCase(), location = config.locations.asia } = {}) {
+  async createOne({ password, email, location, userName } = {}) {
     const user = await this.models.User.create({
       fullName: this.faker.name.findName(),
-      userName: this.faker.internet.userName().toLowerCase(),
-      email,
-      password: await this.utility.genHashForPass(password),
+      userName: userName || this.faker.internet.userName().toLowerCase(),
+      email: email || this.faker.internet.email().toLowerCase(),
+      password: await this.utility.genHashForPass(password || config.defaultPassword),
       contactNo: this.faker.phone.phoneNumber(),
       profilePhoto: {
         url: config.random.imageURL,
         public_id: this.faker.random.uuid(),
       },
       bio: this.faker.lorem.paragraph(1),
-      location,
+      location: location || config.locations.asia,
       address: this.faker.address.streetAddress(),
       gender: config.genders.Male,
       cart: [],
