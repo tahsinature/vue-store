@@ -13,7 +13,7 @@ class ProductSeeder extends BaseSeeder {
         url: config.random.imageURL,
         public_id: this.faker.random.uuid(),
       },
-      bio: this.faker.lorem.paragraph(1),
+      bio: this.faker.lorem.words(5),
       location: location || config.locations.asia,
       address: this.faker.address.streetAddress(),
       gender: config.genders.Male,
